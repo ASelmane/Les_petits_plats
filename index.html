@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <link rel="icon" type="image/png" href="assets/favicon.png" />
+        <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet" />
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <title>Les petits plats</title>
+    </head>
+
+    <body>
+        <header>
+            <img src="assets/images/logo.svg" alt="Les petits plats" class="logo" />
+        </header>
+        <main id="main">
+            <section class="search">
+                <div class="search_bar">
+                    <input type="text" name="search" id="search" placeholder="Rechercher une recette" />
+                    <img src="assets/icons/search.svg" alt="search" />
+                </div>
+                <div class="taglist"></div>
+                <div class="tag_dropdown">
+                    <div class="dropdown ddl-ingredients ingredients">
+                        <button class="dropdown_btn btn-ingredients">
+                            Ingredients
+                            <img src="assets/icons/arrow.svg" alt="open dropdown" />
+                        </button>
+                        <div class="dropdown_menu">
+                            <div class="dropdown_search">
+                                <input class="dropdown_search_input" type="text" name="search_ingredients" placeholder="Rechercher un ingrédient" />
+                                <img src="assets/icons/arrow.svg" alt="close dropdown" />
+                                <button class="close"></button>
+                            </div>
+                            <ul class="dropdown_list">
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="dropdown ddl-appareils appareils">
+                        <button class="dropdown_btn btn-appareils">
+                            Appareils
+                            <img src="assets/icons/arrow.svg" alt="open dropdown" />
+                        </button>
+                        <div class="dropdown_menu">
+                            <div class="dropdown_search">
+                                <input class="dropdown_search_input" type="text" name="search_appareils" placeholder="Rechercher un appareil" />
+                                <img src="assets/icons/arrow.svg" alt="close dropdown" />
+                                <button class="close"></button>
+                            </div>
+                            <ul class="dropdown_list">
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="dropdown ddl-ustensiles ustensiles">
+                        <button class="dropdown_btn btn-ustensiles">
+                            Ustensiles
+                            <img src="assets/icons/arrow.svg" alt="open dropdown" />
+                        </button>
+                        <div class="dropdown_menu">
+                            <div class="dropdown_search">
+                                <input class="dropdown_search_input" type="text" name="search_ustensiles" placeholder="Rechercher un ustensile" />
+                                <img src="assets/icons/arrow.svg" alt="close dropdown" />
+                                <button class="close"></button>
+                            </div>
+                            <ul class="dropdown_list">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="recipes">
+            </section>
+        </main>
+        <script src="scripts/utils/tag.js"></script>
+        <script type="module" src="scripts/pages/index.js"></script>
+    </body>
+</html>
