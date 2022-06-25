@@ -1,7 +1,16 @@
 import { recipes } from "../data/recipe.js";
 import { recipeFactory } from "../factories/recipes.js";
 import { tagFactory } from "../factories/tag.js";
+import { addSearch } from "../utils/sortData.js";
 
+const searchBar = document.getElementById("search");
+
+searchBar.addEventListener("keyup", (e) => {
+    const search = e.target.value.toLowerCase();
+    addSearch(search);
+});
+
+// Get recipes information for tags dropdowns
 function getRecipesTag() {
     let tag = [];
     let appareils = [];
@@ -20,14 +29,11 @@ function getRecipesTag() {
             j++;    
         });
     });
-    tag[0] = new Set(appareils);
-    tag[1] = new Set(ustensiles);
-    tag[2] = new Set(ingredients);
+    tag.push(new Set(appareils),new Set(ustensiles),new Set(ingredients));
     tag[0]["type"] = "appareils";
     tag[1]["type"] = "ustensiles";
     tag[2]["type"] = "ingredients";
-    
-    return { tag };
+    return tag ;
 }
 
 function displayData(recipes) {
@@ -38,8 +44,7 @@ function displayData(recipes) {
 }
 
 function init() {
-    const { tag } = getRecipesTag();
-    console.log(tag);
+    const tag = getRecipesTag();
     displayData(recipes);
     tagFactory(tag).getTagListDOM();
 }
