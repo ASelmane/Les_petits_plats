@@ -200,6 +200,10 @@ button {
     display: none;
 }
 
+.dropdown_list li.hidden {
+    display: none;
+}
+
 .recipe_img {
     width: 100%;
     height: 12em;
