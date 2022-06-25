@@ -20,9 +20,6 @@ function getRecipesTag() {
             j++;    
         });
     });
-    appareils.sort();
-    ustensiles.sort();
-    ingredients.sort();
     tag[0] = new Set(appareils);
     tag[1] = new Set(ustensiles);
     tag[2] = new Set(ingredients);

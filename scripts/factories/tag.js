@@ -1,3 +1,5 @@
+import { tagFilter } from "../utils/sortData.js";
+
 export const tagFactory = (data) => {
 
     // Create the DOM elements for the tag in dropdowns
@@ -9,7 +11,8 @@ export const tagFactory = (data) => {
                 const tag = document.createElement("li");
                 tag.textContent = item[0].toUpperCase() + item.slice(1);
                 tag.addEventListener("click", () => {
-                    getTagList(item, items.type);
+                    getTagList(tag, items.type);
+                    tag.classList.add("hidden");
                 });
                 list.append(tag);
             });
@@ -35,10 +38,13 @@ function getTagList(name,type) {
     } else {
         tag.classList.add("ustensiles");
     }
-    tag.textContent = name;
+    tag.textContent = name.textContent;
     tag.append(remove);
     tag.querySelector(".tag_remove").addEventListener("click", () => {
         tag.remove();
+        name.classList.remove("hidden");
+        tagFilter();
     });
     tagList.append(tag);
+    tagFilter();
 }

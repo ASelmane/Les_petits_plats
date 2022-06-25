@@ -47,8 +47,8 @@ export const recipeFactory = (data) => {
         const descript = document.createElement("p");
         descript.setAttribute("class", "recipe_description");
         descript.textContent = description;
-        divInfo.setAttribute("data-ustensils", ustensils);
-        divInfo.setAttribute("data-appliance", appliance);
+        divInfo.setAttribute("data-ustensils", ustensils.toString().toLowerCase());
+        divInfo.setAttribute("data-appliance", appliance.toLowerCase());
         divInfoHeader.append(title, timer);
         divInfoContent.append(ingredientsList, descript);
         divInfo.append(divInfoHeader, divInfoContent);
