@@ -1,4 +1,4 @@
-import { tagFilter } from "../utils/sortData.js";
+import { addSearch } from "../utils/sortData.js";
 
 export const tagFactory = (data) => {
 
@@ -13,6 +13,11 @@ export const tagFactory = (data) => {
                 tag.addEventListener("click", () => {
                     getTagList(tag, items.type);
                     tag.classList.add("hidden");
+                    dropdown.querySelector(".dropdown_search_input").value = "";
+                    dropdown.querySelector(".dropdown_search_input").dispatchEvent(new KeyboardEvent("keyup", {
+                        key: "Backspace",
+                    }));
+                    dropdown.querySelector(".dropdown_search_input").focus();
                 });
                 list.append(tag);
             });
@@ -22,8 +27,8 @@ export const tagFactory = (data) => {
     return { getTagListDOM };
 };
 
-// Create the DOM elements for the selected tag in the tag list 
-function getTagList(name,type) {
+// Create the DOM elements for the selected tag in the tag list
+function getTagList(name, type) {
     const tagList = document.querySelector(".taglist");
     const dropdown = document.querySelector(".dropdown." + type);
     const tag = document.createElement("span");
@@ -42,9 +47,11 @@ function getTagList(name,type) {
     tag.append(remove);
     tag.querySelector(".tag_remove").addEventListener("click", () => {
         tag.remove();
-        name.classList.remove("hidden");
-        tagFilter();
+        if(name.textContent.toLowerCase().includes(dropdown.querySelector(".dropdown_search_input").value.toLowerCase())) {
+            name.classList.remove("hidden");
+        }
+        addSearch();
     });
     tagList.append(tag);
-    tagFilter();
+    addSearch();
 }

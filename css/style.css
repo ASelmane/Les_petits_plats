@@ -42,7 +42,6 @@ button {
     position: absolute;
     right: 0.5em;
     top: 1em;
-    cursor: pointer;
 }
 
 .taglist {
@@ -286,4 +285,11 @@ button {
 
 .recipe_appareil {
     display: none;
+}
+
+.no_recipe {
+    grid-column: 1 / span 3;
+    text-align: center;
+    width: 48em;
+    margin: 0 auto;
 }
