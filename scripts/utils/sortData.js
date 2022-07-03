@@ -1,4 +1,5 @@
 import { recipes } from "../data/recipe.js";
+import { tagFactory } from "../factories/tag.js";
 
 const searchBar = document.getElementById("search");
 let recipFiltered = recipes;
@@ -71,6 +72,12 @@ export function addSearch(filter = searchBar.value.toLowerCase()) {
             return true;
         }
     }
+
+    const tagd = getRecipesTag();
+    document.querySelectorAll(".dropdown_list").forEach((dropdown) => {
+        dropdown.innerHTML = "";
+    });
+    tagFactory(tagd).getTagListDOM();
 }
 
 export function tagSearch(filter, type) {
@@ -95,24 +102,38 @@ export function tagSearch(filter, type) {
     });
 }
 
-
-// export function addSearch(filter) {
-//     const recipes = document.querySelectorAll(".recipe_card");
-//     recipes.forEach((recipe) => {
-//         let ingr = 0;
-//         const title = recipe.querySelector(".recipe_title").textContent.toLowerCase();
-//         const description = recipe.querySelector(".recipe_description").textContent.toLowerCase();
-//         const ingredients = recipe.querySelectorAll(".recipe_ingredient");
-//         ingredients.forEach((ingredient) => {
-//             const ingred = ingredient.textContent.toLowerCase();
-//             if (ingred.includes(filter)) {
-//                 ingr = 1;
-//             }
-//         });
-//         if (title.includes(filter) || description.includes(filter) || ingr === 1 || filter.length < 3) {
-//             recipe.classList.remove("hidden");
-//         } else {
-//             recipe.classList.add("hidden");
-//         }
-//     });
-// }
+// Get recipes information for tags dropdowns
+export function getRecipesTag() {
+    let tag = [];
+    let appareils = [];
+    let ustensiles = [];
+    let ingredients = [];
+    let i = 0;
+    let j = 0;
+    let tagSelected = [];
+    document.querySelectorAll(".taglist span").forEach((tag) => {
+        tagSelected.push(tag.textContent.toLowerCase());
+    });
+    recipFiltered.forEach((recipe, index) => {
+        if (!tagSelected.includes(recipe.appliance.toLowerCase())) {
+            appareils[index] = recipe.appliance.toLowerCase();
+        }
+        recipe.ustensils.forEach((ustensil) => {
+            if (!tagSelected.includes(ustensil.toLowerCase())) {
+                ustensiles[i] = ustensil.toLowerCase();
+                i++;
+            }
+        });
+        recipe.ingredients.forEach((ingredient) => {
+            if (!tagSelected.includes(ingredient.ingredient.toLowerCase())) {
+                ingredients[j] = ingredient.ingredient.toLowerCase();
+                j++;    
+            }
+        });
+    });
+    tag.push(new Set(appareils),new Set(ustensiles),new Set(ingredients));
+    tag[0]["type"] = "appareils";
+    tag[1]["type"] = "ustensiles";
+    tag[2]["type"] = "ingredients";
+    return tag ;
+}
